@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.ServerRegisterRequest;
+import com.example.demo.dto.ServerResponse;
 import com.example.demo.entity.Server;
 import com.example.demo.repository.ServerRepository;
 import com.example.demo.service.ServerMonitor;
@@ -33,7 +34,7 @@ public class ServerController {
     }
 
     @GetMapping("/servers")
-    public List<Server> getServers() {
+    public List<ServerResponse> getServers() {
         return serverService.getAll();
     }
 
