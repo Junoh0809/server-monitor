@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.ServerRegisterRequest;
 import com.example.demo.dto.ServerResponse;
 import com.example.demo.entity.Server;
+import com.example.demo.exception.ServerNotFoundException;
 import com.example.demo.repository.ServerRepository;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,7 @@ public class ServerService {
 
     public String update(Long id, ServerRegisterRequest request) {
         Server server = serverRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("해당 id의 서버가 없습니다:: " + id));
+                .orElseThrow(() -> new ServerNotFoundException(id));
         server.setHostname(request.getHostname());
         server.setIpAddress(request.getIpAddress());
         serverRepository.save(server);
