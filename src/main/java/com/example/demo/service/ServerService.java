@@ -24,7 +24,7 @@ public class ServerService {
 
     public String register(ServerRegisterRequest request) {
         System.out.println("서버 등록: " + request.getHostname() + " (" + request.getIpAddress() + ")");
-        Server server = new Server(request.getHostname(), request.getIpAddress());
+        Server server = new Server(request.getHostname(), request.getIpAddress(), request.getPort());
         serverRepository.save(server);
         return request.getHostname() + " 등록 완료";
     }
@@ -41,6 +41,7 @@ public class ServerService {
                 .orElseThrow(() -> new ServerNotFoundException(id));
         server.setHostname(request.getHostname());
         server.setIpAddress(request.getIpAddress());
+        server.setPort(request.getPort());
         serverRepository.save(server);
         return id + "번 서버 수정 완료";
     }
@@ -55,15 +56,15 @@ public class ServerService {
         List<Server> servers = serverRepository.findAll();
 
         for (Server server : servers) {
-            boolean isReachable = pingServer(server.getIpAddress());
+            boolean isReachable = pingServer(server.getIpAddress(), server.getPort());
             String status = isReachable ? "정상" : "다운";
             System.out.println(server.getHostname() + " (" + server.getIpAddress() + "): " + status);
         }
     }
 
-    private boolean pingServer(String ipAddress) {
+    private boolean pingServer(String ipAddress, int port) {
         try (Socket socket = new Socket()) {
-            socket.connect(new java.net.InetSocketAddress(ipAddress, 22), 2000);
+            socket.connect(new java.net.InetSocketAddress(ipAddress, port), 2000);
             // TCP socket 방식, 특정 포트만 열어서 서버 상태 확인 가능
             return true;
 

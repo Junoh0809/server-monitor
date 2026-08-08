@@ -3,6 +3,7 @@ package com.example.demo.dto;
 public class ServerRegisterRequest {
     private String hostname;
     private String ipAddress;
+    private int port;
 
     public ServerRegisterRequest() {}
 
@@ -11,4 +12,7 @@ public class ServerRegisterRequest {
 
     public String getIpAddress() {return ipAddress;}
     public void setIpAddress(String ipAddress) {this.ipAddress = ipAddress;}
+
+    public int getPort() {return port;}
+    public void setPort(int port) {this.port = port;}
 }

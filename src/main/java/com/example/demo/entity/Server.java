@@ -14,12 +14,14 @@ public class Server {
 
     private String hostname;
     private String ipAddress;
+    private int port;
 
     public Server() {}
 
-    public Server(String hostname, String ipAddress) {
+    public Server(String hostname, String ipAddress, int port) {
         this.hostname = hostname;
         this.ipAddress = ipAddress;
+        this.port = port;
     }
 
     public Long getId() {
@@ -40,5 +42,13 @@ public class Server {
 
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 }
