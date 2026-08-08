@@ -2,8 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.ServerRegisterRequest;
 import com.example.demo.dto.ServerResponse;
-import com.example.demo.entity.Server;
-import com.example.demo.repository.ServerRepository;
 import com.example.demo.service.ServerMonitor;
 import com.example.demo.service.ServerService;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +11,10 @@ import java.util.List;
 @RestController
 public class ServerController {
     private final ServerMonitor serverMonitor;
-    private final ServerRepository serverRepository;
     private final ServerService serverService;
 
-    public ServerController(ServerMonitor serverMonitor, ServerRepository serverRepository, ServerService serverService) {
+    public ServerController(ServerMonitor serverMonitor, ServerService serverService) {
         this.serverMonitor = serverMonitor;
-        this.serverRepository = serverRepository;
         this.serverService = serverService;
     }
 
@@ -40,7 +36,7 @@ public class ServerController {
 
     @DeleteMapping("/servers/{id}")
     public String deleteServer(@PathVariable Long id) {
-        return serverService.delte(id);
+        return serverService.delete(id);
     }
 
     @PutMapping("/servers/{id}")
