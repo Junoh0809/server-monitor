@@ -4,6 +4,7 @@ import com.example.demo.dto.ServerRegisterRequest;
 import com.example.demo.dto.ServerResponse;
 import com.example.demo.service.ServerMonitor;
 import com.example.demo.service.ServerService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class ServerController {
     }
 
     @PostMapping("/servers")
-    public String registerServer(@RequestBody ServerRegisterRequest request) {
+    public String registerServer(@Valid @RequestBody ServerRegisterRequest request) {
         return serverService.register(request);
     }
 
